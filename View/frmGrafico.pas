@@ -1,0 +1,93 @@
+unit frmGrafico;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, VclTee.TeeGDIPlus, VCLTee.TeEngine,
+  VCLTee.TeeProcs, VCLTee.Chart, Vcl.ExtCtrls, VCLTee.Series, Data.DB,
+  Datasnap.DBClient, VCLTee.DBChart, VCLTee.TeeDBCrossTab;
+
+type
+  TfrmGraficoF = class(TForm)
+    Panel: TPanel;
+    DBChart1: TDBChart;
+    Series1: TPieSeries;
+    cdsMovimentacao: TClientDataSet;
+    cdsMovimentacaoCategoria: TStringField;
+    cdsMovimentacaoValor: TCurrencyField;
+    dsMovimentacao: TDataSource;
+    procedure FormDestroy(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+
+    class function Execute(pID_Carteira: integer;filtro:string): boolean;
+  end;
+
+var
+  frmGraficoF: TfrmGraficoF;
+
+implementation
+
+{$R *.dfm}
+
+uses uMovimentacaoController, uMovimentacaoModel;
+
+{ TfrmGraficoF }
+
+class function TfrmGraficoF.Execute(pID_Carteira: integer;filtro:string): boolean;
+  var
+  // variáveis das camadas utilizadas na rotina
+    objetoMovimentacao: TMovimentacao;
+    objetoController: TControllerMovimentacao;
+begin
+  with TfrmGraficoF.Create(Screen.ActiveForm) do
+  begin
+      objetoMovimentacao  := TMovimentacao.Create; // classe Modelo
+      objetoController := TControllerMovimentacao.Create; // classe Controller
+      try
+        objetoMovimentacao.id_carteiras := pID_Carteira;
+        objetoMovimentacao.filter := filtro;
+        objetoController.BuscarGrafico(objetoMovimentacao);
+
+        if not cdsMovimentacao.Active then
+           cdsMovimentacao.CreateDataSet;
+
+        if objetoMovimentacao.qrySQL.IsEmpty then
+           MessageDlg('Não foi encontrado nenhum lançamento!', mtInformation, [mbOK], 0);
+
+        if not cdsMovimentacao.Active then
+           cdsMovimentacao.CreateDataSet;
+
+        objetoMovimentacao.qrySQL.First;
+        while not objetoMovimentacao.qrySQL.Eof do begin
+           cdsMovimentacao.Append;
+           cdsMovimentacaoCategoria.AsString    := objetoMovimentacao.qrySQL.FieldByName('categoria').AsString;
+           cdsMovimentacaoValor.AsCurrency      := objetoMovimentacao.qrySQL.FieldByName('valor').AsFloat;;
+           cdsMovimentacao.Post;
+
+          objetoMovimentacao.qrySQL.Next;
+        end;
+
+
+         DBChart1.Title.Caption := 'Gráfico de movimentações por categoria';
+
+      finally
+        // liberação dos objetos da memória
+        FreeAndNil(objetoMovimentacao);
+        FreeAndNil(objetoController);
+      end;
+
+
+      Result:= ShowModal() = mrOK;
+  end;
+end;
+
+procedure TfrmGraficoF.FormDestroy(Sender: TObject);
+begin
+   FreeAndNil(cdsMovimentacao);
+end;
+
+end.

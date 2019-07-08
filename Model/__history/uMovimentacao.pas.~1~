@@ -1,0 +1,83 @@
+unit uMovimentacao.Model;
+
+interface
+
+uses
+  Dialogs, MyAccess;
+
+type
+   TCategoria=class
+
+   private
+    Fid: integer;
+    Fnome: string;
+    FConexaoBanco: TMyConnection;
+
+   public
+      constructor Create;
+      procedure BuscaCategorias(const objetoCategoria: TCategoria);
+
+      property ConexaoBanco:TMyConnection read FConexaoBanco;
+      property id: integer read Fid;
+      property nome: string read Fnome;
+   end;
+
+
+  TMovimentacao = class
+  private
+    // atributos da classe
+    FCodigo: integer;
+    FNome: string;
+    FCPF: string;
+  public
+    // métodos públicos da classe
+    constructor Create;
+    procedure Salvar(const objetoMovimentacao: TMovimentacao);
+
+    // propriedades da classe (semelhante aos getters and setters)
+    property Codigo: integer read FCodigo write FCodigo;
+    property Nome: string read FNome write FNome;
+    property CPF: string read FCPF write FCPF;
+  end;
+
+implementation
+
+uses
+  SysUtils, uConexaoBanco;
+
+{ TCliente }
+
+constructor TMovimentacao.Create;
+begin
+  // inicialização dos valores do objeto
+  FCodigo := 0;
+  FNome   := '';
+end;
+
+procedure TMovimentacao.Salvar(const objetoMovimentacao: TMovimentacao);
+begin
+  // a rotina para salvar o cliente no banco de dados deve ser escrita aqui
+//
+  MessageDlg('Informações do cliente na camada Model: ' + sLineBreak + sLineBreak +
+             'Codigo: ' + IntToStr(objetoCliente.Codigo) + sLineBreak +
+             'Nome: '   + objetoCliente.Nome + sLineBreak +
+             'CPF: '    + objetoCliente.FCPF,
+             mtInformation, [mbOK], 0);
+end;
+
+{ TCategoria }
+
+procedure TCategoria.BuscaCategorias(const objetoCategoria: TCategoria);
+begin
+
+end;
+
+constructor TCategoria.Create;
+ var ConexaoBanco : TConexaoBanco;
+begin
+   ConexaoBanco := TConexaoBanco.Create;
+
+   FConexaoBanco := ConexaoBanco.GetConexao;
+end;
+
+end.

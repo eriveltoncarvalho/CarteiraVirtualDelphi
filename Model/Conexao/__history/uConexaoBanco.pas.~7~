@@ -1,0 +1,111 @@
+unit uConexaoBanco;
+
+interface
+
+uses
+  inifiles, SysUtils, Forms, MyAccess;
+
+type
+   TConexaoBanco = class
+      private
+
+       FConexaoBanco : TMyConnection;
+      public
+
+       constructor Create;
+       destructor  Destroy; override;
+
+
+       function GetConexao : TMyConnection;
+       property ConexaoBanco : TMyConnection   read GetConexao;
+   end;
+
+implementation
+
+{ TConexaoBanco }
+
+constructor TConexaoBanco.Create;
+var ArquivoINI, Servidor, Caminho, DriverName, UserName, PassWord : string;
+    LocalServer : Integer;
+    Configuracoes : TIniFile;
+begin
+   ArquivoINI := ExtractFilePath(Application.ExeName) + '\config.ini';
+
+
+
+   if not FileExists(ArquivoINI) then begin
+
+//       ('Arquivo de Config não Encontrado - Entre em contato como suporte técnico!');
+
+     Exit;
+
+    end;
+
+
+
+   // Carregando as informações do arquivo de configurações
+
+   Configuracoes := TIniFile.Create(ArquivoINI);
+
+
+
+   Try
+
+     Servidor   := Configuracoes.ReadString('Dados', 'Servidor',   Servidor);
+
+     Caminho    := Configuracoes.ReadString('Dados', 'DataBase',   Caminho);
+
+     DriverName := Configuracoes.ReadString('Dados', 'DriverName', DriverName);
+
+     UserName   := Configuracoes.ReadString('Dados', 'UserName',   UserName);
+
+     PassWord   := Configuracoes.ReadString('Dados', 'PassWord',   PassWord);
+
+   Finally
+
+     Configuracoes.Free;
+
+   end;
+
+
+
+   try
+
+     FConexaoBanco := TMyConnection.Create(Application);
+
+    FConexaoBanco.Connected := False;
+
+     Configuracoes.ReadString('PARAMETROS', 'server',   FConexaoBanco.Server);
+     Configuracoes.ReadString('PARAMETROS', 'port',   IntToStr(FConexaoBanco.Port));
+     Configuracoes.ReadString('PARAMETROS', 'username',   FConexaoBanco.Username);
+     Configuracoes.ReadString('PARAMETROS', 'password',    FConexaoBanco.Password);
+     Configuracoes.ReadString('PARAMETROS', 'database',   FConexaoBanco.Database);
+
+
+//     FConexaoBanco.Server    :='localhost';
+//     FConexaoBanco.Port      :=3306;
+//     FConexaoBanco.Username  :='root';
+//     FConexaoBanco.Password  :='';
+//     FConexaoBanco.Database  :='carteira_virtual';
+
+     FConexaoBanco.Connected := True;
+
+   except
+
+     //Erro('Erro ao Conectar o Banco de dados. Verifique as preferencias do sistema!');
+
+   end;
+end;
+
+destructor TConexaoBanco.Destroy;
+begin
+  FConexaoBanco.Free;
+  inherited;
+end;
+
+function TConexaoBanco.GetConexao: TMyConnection;
+begin
+   Result := FConexaoBanco;
+end;
+
+end.

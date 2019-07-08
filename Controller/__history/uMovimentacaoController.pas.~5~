@@ -1,0 +1,38 @@
+unit uMovimentacaoController;
+
+interface
+
+uses uMovimentacaoModel;
+
+type
+  TControleMovimentacao = class
+  private
+
+  public
+    // procedimento para salvar o cliente
+    procedure Salvar(const objetoMovimentacao: TMovimentacao);
+  end;
+
+implementation
+
+uses
+  StrUtils, System.SysUtils;
+
+{ TControleCliente }
+
+procedure TControleMovimentacao.Salvar(const objetoMovimentacao: TMovimentacao);
+begin
+
+  if objetoMovimentacao.id_categorias = 0 then
+    raise Exception.Create('Preencha a categotia.');
+
+  if objetoMovimentacao.valor = 0 then
+    raise Exception.Create('Preencha o valor.');
+
+  if objetoMovimentacao.observacao = '' then
+    raise Exception.Create('Preencha a obervação.');
+
+
+  // se o objeto for válido, o método Salvar é invocado
+  objetoMovimentacao.Salvar(objetoMovimentacao);
+end;

@@ -1,0 +1,104 @@
+unit uMovimentacaoModel;
+
+interface
+
+uses
+  Dialogs, MyAccess;
+
+type
+
+  TMovimentacao = class
+  private
+   // atributos da classe
+    Foperacao: string;
+    Fobservacao: string;
+    Fvalor: double;
+    Fdata_cadastro: TDateTime;
+    FCPF: integer;
+    Fid: integer;
+    Fid_carteiras: integer;
+    Fsaldo: double;
+    FConexaoBanco: TMyConnection;
+
+  public
+    // métodos públicos da classe
+    constructor Create;
+    destructor  Destroy; override;
+    procedure Salvar(const objetoMovimentacao: TMovimentacao);
+    procedure GetSaldo(const objetoMovimentacao: TMovimentacao);
+
+    // propriedades da classe
+    property id: integer read Fid write Fid;
+    property id_carteiras: integer read Fid_carteiras write Fid_carteiras;
+    property id_categorias: integer read FCPF write FCPF;
+    property data_cadastro: TDateTime read Fdata_cadastro write Fdata_cadastro;
+    property operacao: string read Foperacao write Foperacao;
+    property valor: double read Fvalor write Fvalor;
+    property saldo: double read Fsaldo write Fsaldo;
+    property observacao: string read Fobservacao write Fobservacao;
+    property ConexaoBanco:TMyConnection read FConexaoBanco;
+  end;
+
+implementation
+
+uses
+  SysUtils, uConexaoBanco;
+
+{ TMovimentacao }
+
+constructor TMovimentacao.Create;
+ var ConexaoBanco : TConexaoBanco;
+begin
+  //criando a conexão com o banco
+  ConexaoBanco := TConexaoBanco.Create;
+  FConexaoBanco := ConexaoBanco.GetConexao;
+end;
+
+destructor TMovimentacao.Destroy;
+begin
+  inherited;
+  FConexaoBanco.Free;
+end;
+
+procedure TMovimentacao.GetSaldo(const objetoMovimentacao: TMovimentacao);
+var qry : TMyQuery;
+begin
+   try
+     qry := TMyQuery.Create(nil);
+     qry.Connection:= FConexaoBanco;
+     qry.SQL.Add('select saldo from movimentacoes order by id desc limit 1');
+     qry.Open;
+
+     Self.saldo := qry.FieldByName('saldo').AsFloat;
+
+   finally
+     FreeAndNil(qry);
+   end;
+
+end;
+
+procedure TMovimentacao.Salvar(const objetoMovimentacao: TMovimentacao);
+ var Qry : TMyQuery;
+begin
+    try
+      Qry := TMyQuery.Create(nil);
+      qry.Connection:= FConexaoBanco;
+      qry.SQL.Add('INSERT INTO movimentacoes (id_carteiras, id_categorias,'+
+                  ' data_cadastro, operacao, valor, saldo, observacao) VALUES('+','+
+                  IntToStr(objetoMovimentacao.id_carteiras)+','+
+                  IntToStr(objetoMovimentacao.id_categorias)+','+
+                  QuotedStr('current_timestamp')+','+
+                  QuotedStr(objetoMovimentacao.operacao)+','+
+                  FloatToStr(objetoMovimentacao.valor)+','+
+                  FloatToStr(objetoMovimentacao.saldo)+','+
+                  QuotedStr(objetoMovimentacao.observacao)+')');
+      Qry.ExecSQL;
+    finally
+
+     FreeAndNil(Qry);
+    end;
+
+
+end;
+
+end.

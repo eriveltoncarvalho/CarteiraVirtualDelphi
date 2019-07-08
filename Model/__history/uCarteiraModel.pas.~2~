@@ -1,0 +1,77 @@
+unit uCarteiraModel;
+
+interface
+
+uses
+  Dialogs, MyAccess;
+
+type
+   TCarteira=class
+   private
+      // atributos da classe
+      Fid: integer;
+      Fnome: string;
+      FConexaoBanco: TMyConnection;
+    FqrySQL: TMyQuery;
+
+   public
+      // métodos públicos da classe
+      constructor Create;
+      destructor  Destroy; override;
+      procedure Buscar(const objetoCategoria: TCarteira);
+      procedure Salvar(const objetoCategoria: TCarteira);
+
+
+      // propriedades da classe
+      property id: integer read Fid write Fid;
+      property nome: string read Fnome write Fnome;
+      property ConexaoBanco:TMyConnection read FConexaoBanco;
+      property qrySQL:TMyQuery read FqrySQL write FqrySQL;
+
+   end;
+
+implementation
+
+uses
+  SysUtils, uConexaoBanco;
+
+
+{ TCategoria }
+
+procedure TCarteira.Buscar(const objetoCategoria: TCarteira);
+begin
+  Self.qrySQL := TMyQuery.Create(nil);
+  Self.qrySQL.Connection:= FConexaoBanco;
+  Self.qrySQL.SQL.Add('select *from carteiras order by id');
+  Self.qrySQL.Open;
+end;
+
+constructor TCarteira.Create;
+ var ConexaoBanco : TConexaoBanco;
+begin
+   ConexaoBanco := TConexaoBanco.Create;
+
+   FConexaoBanco := ConexaoBanco.GetConexao;
+end;
+
+destructor TCarteira.Destroy;
+begin
+  inherited;
+  FConexaoBanco.Free;
+end;
+
+procedure TCarteira.Salvar(const objetoCategoria: TCarteira);
+ var Qry : TMyQuery;
+begin
+   try
+      Qry := TMyQuery.Create(nil);
+      qry.Connection:= FConexaoBanco;
+      qry.SQL.Add('INSERT INTO categorias (nome) VALUES('+QuotedStr(objetoCategoria.nome)+')');
+      Qry.ExecSQL;
+    finally
+
+     FreeAndNil(Qry);
+    end;
+end;
+
+end.

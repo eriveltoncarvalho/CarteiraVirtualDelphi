@@ -1,0 +1,40 @@
+unit frmCadastroCategoria;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ToolWin, Vcl.ComCtrls, Vcl.StdCtrls,
+  VCLTee.TeCanvas, Vcl.ExtCtrls;
+
+type
+  TfrmCadastroCategoriaF = class(TForm)
+    ToolBar1: TToolBar;
+    btnSalvar: TButton;
+    btnNovo: TButton;
+    Panel1: TPanel;
+    procedure btnSalvarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadastroCategoriaF: TfrmCadastroCategoriaF;
+
+implementation
+
+{$R *.dfm}
+
+uses uConexaoBanco;
+
+procedure TfrmCadastroCategoriaF.btnSalvarClick(Sender: TObject);
+ var ConexaoBanco : TConexaoBanco;
+begin
+   ConexaoBanco := TConexaoBanco.Create;
+
+   ConexaoBanco.GetConexao;
+end;
+
+end.

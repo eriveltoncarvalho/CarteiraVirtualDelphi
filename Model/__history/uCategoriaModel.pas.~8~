@@ -1,0 +1,75 @@
+unit uCategoriaModel;
+
+interface
+
+uses
+  Dialogs, MyAccess;
+
+type
+   TCategoria=class
+   private
+      // atributos da classe
+      Fid: integer;
+      Fnome: string;
+      FConexaoBanco: TMyConnection;
+
+   public
+      // métodos públicos da classe
+      constructor Create;
+      destructor  Destroy; override;
+      procedure Busca(var qrySQL:TMyQuery);
+      procedure Salvar(const objetoCategoria: TCategoria);
+
+
+      // propriedades da classe
+      property id: integer read Fid write Fid;
+      property nome: string read Fnome write Fnome;
+      property ConexaoBanco:TMyConnection read FConexaoBanco;
+
+   end;
+
+implementation
+
+uses
+  SysUtils, uConexaoBanco;
+
+
+{ TCategoria }
+
+procedure TCategoria.Busca(var qrySQL:TMyQuery);
+begin
+  qrySQL := TMyQuery.Create(nil);
+  qrySQL.Connection:= FConexaoBanco;
+  qrySQL.SQL.Add('select *from categorias order by id');
+  qrySQL.Open;
+end;
+
+constructor TCategoria.Create;
+ var ConexaoBanco : TConexaoBanco;
+begin
+   ConexaoBanco := TConexaoBanco.Create;
+
+   FConexaoBanco := ConexaoBanco.GetConexao;
+end;
+
+destructor TCategoria.Destroy;
+begin
+  inherited;
+  FConexaoBanco.Free;
+end;
+
+procedure TCategoria.Salvar(const objetoCategoria: TCategoria);
+ var Qry : TMyQuery;
+begin
+   try
+      Qry := TMyQuery.Create(nil);
+      qry.Connection:= FConexaoBanco;
+      qry.SQL.Add('INSERT INTO categorias (nome) VALUES('+QuotedStr(objetoCategoria.nome)+')');
+      Qry.ExecSQL;
+    finally
+
+     FreeAndNil(Qry);
+    end;
+end;
+
+end.

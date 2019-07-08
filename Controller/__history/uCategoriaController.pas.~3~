@@ -1,0 +1,32 @@
+unit uCategoriaController;
+
+interface
+
+uses uCategoriaModel;
+
+type
+  TControllerCategoria = class
+  private
+
+  public
+    // procedimento para salvar o categoria
+    procedure Salvar(const objetoCategoria: TCategoria);
+  end;
+
+implementation
+
+uses
+  StrUtils, System.SysUtils,Dialogs;
+
+{ TControllerCategoria }
+
+procedure TControllerCategoria.Salvar(const objetoCategoria: TCategoria);
+begin
+   if trim(objetoCategoria.nome) = '' then
+      Raise exception.Create('Preencha a categoria!');
+
+  // se o objeto for válido, o método Salvar é invocado
+  objetoCategoria.Salvar(objetoCategoria);
+end;
+
+end.

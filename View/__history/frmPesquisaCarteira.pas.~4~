@@ -1,0 +1,46 @@
+unit frmPesquisaCarteira;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls,
+  Data.DB, Datasnap.DBClient, Vcl.Grids, Vcl.DBGrids;
+
+type
+  TfrmPesquisaCarteiraF = class(TForm)
+    Panel: TPanel;
+    Bevel: TBevel;
+    btnSalvar: TBitBtn;
+    btnCancelar: TBitBtn;
+    GroupBox1: TGroupBox;
+    dbgMovimentacao: TDBGrid;
+    cdsPesqCarteira: TClientDataSet;
+    dsPesqCarteira: TDataSource;
+    cdsPesqCarteiraID: TIntegerField;
+    cdsPesqCarteiraNome: TStringField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+
+     class function Execute: boolean;
+  end;
+
+var
+  frmPesquisaCarteiraF: TfrmPesquisaCarteiraF;
+
+implementation
+
+{$R *.dfm}
+
+{ TfrmPesquisaCarteiraF }
+
+class function TfrmPesquisaCarteiraF.Execute: boolean;
+begin
+   with TfrmPesquisaCarteiraF.Create(Screen.ActiveForm) do begin
+     Result:= ShowModal() = mrOK;
+   end;
+end;
+
+end.

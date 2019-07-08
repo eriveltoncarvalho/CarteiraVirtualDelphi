@@ -1,0 +1,114 @@
+object frmPesquisaCarteiraF: TfrmPesquisaCarteiraF
+  Left = 0
+  Top = 0
+  Caption = 'Pesquisa Carteira'
+  ClientHeight = 574
+  ClientWidth = 425
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel: TPanel
+    Left = 0
+    Top = 517
+    Width = 425
+    Height = 57
+    Align = alBottom
+    TabOrder = 0
+    ExplicitLeft = 16
+    ExplicitTop = 8
+    ExplicitWidth = 393
+    object Bevel: TBevel
+      Left = 10
+      Top = 9
+      Width = 333
+      Height = 17
+      Shape = bsTopLine
+    end
+    object btnSalvar: TBitBtn
+      Left = 138
+      Top = 20
+      Width = 100
+      Height = 33
+      Caption = 'OK'
+      TabOrder = 0
+    end
+    object btnCancelar: TBitBtn
+      Left = 243
+      Top = 20
+      Width = 100
+      Height = 33
+      Caption = 'Cancelar'
+      TabOrder = 1
+    end
+  end
+  object GroupBox1: TGroupBox
+    Left = 0
+    Top = 0
+    Width = 425
+    Height = 233
+    Align = alTop
+    Caption = 'Carteira'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 1
+    object dbgMovimentacao: TDBGrid
+      Left = 2
+      Top = 15
+      Width = 421
+      Height = 216
+      Align = alClient
+      DataSource = dsPesqCarteira
+      ReadOnly = True
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = [fsBold]
+      Columns = <
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'Codigo'
+          Title.Alignment = taRightJustify
+          Title.Caption = 'C'#243'digo'
+          Width = 77
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Carteira'
+          Width = 287
+          Visible = True
+        end>
+    end
+  end
+  object cdsPesqCarteira: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 240
+    Top = 169
+    object cdsPesqCarteiraID: TIntegerField
+      FieldName = 'Codigo'
+    end
+    object cdsPesqCarteiraNome: TStringField
+      FieldName = 'Carteira'
+      Size = 255
+    end
+  end
+  object dsPesqCarteira: TDataSource
+    DataSet = cdsPesqCarteira
+    Left = 328
+    Top = 169
+  end
+end

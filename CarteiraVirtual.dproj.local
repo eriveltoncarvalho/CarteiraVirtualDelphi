@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2019/07/04 15:06:51.000.193,=D:\work\Unit1.pas</Transaction>
+    <Transaction>2019/07/04 15:08:56.000.344,D:\work\Unit1.pas=D:\work\carteiraVirtual\frmCarteiraVirtual.pas</Transaction>
+    <Transaction>2019/07/04 15:08:56.000.344,D:\work\Unit1.dfm=D:\work\carteiraVirtual\frmCarteiraVirtual.dfm</Transaction>
+    <Transaction>2019/07/04 15:09:17.000.351,D:\work\Project1.dproj=D:\work\carteiraVirtual\CarteiraVirtual.dproj</Transaction>
+    <Transaction>2019/07/05 10:21:25.000.879,D:\work\carteiraVirtual\frmCarteiraVirtual.dfm=D:\work\carteiraVirtual\View\frmCarteiraVirtual.dfm</Transaction>
+    <Transaction>2019/07/05 10:21:25.000.879,D:\work\carteiraVirtual\frmCarteiraVirtual.pas=D:\work\carteiraVirtual\View\frmCarteiraVirtual.pas</Transaction>
+    <Transaction>2019/07/05 10:36:37.000.518,=D:\work\carteiraVirtual\Unit2.pas</Transaction>
+    <Transaction>2019/07/05 10:37:31.000.065,D:\work\carteiraVirtual\Unit2.dfm=D:\work\carteiraVirtual\View\frmCadastroCarteira.dfm</Transaction>
+    <Transaction>2019/07/05 10:37:31.000.065,D:\work\carteiraVirtual\Unit2.pas=D:\work\carteiraVirtual\View\frmCadastroCarteira.pas</Transaction>
+    <Transaction>2019/07/05 10:37:45.000.915,=D:\work\carteiraVirtual\Unit3.pas</Transaction>
+    <Transaction>2019/07/05 10:38:13.000.653,D:\work\carteiraVirtual\Unit3.pas=D:\work\carteiraVirtual\View\frmCadastroCategoria.pas</Transaction>
+    <Transaction>2019/07/05 10:38:13.000.653,D:\work\carteiraVirtual\Unit3.dfm=D:\work\carteiraVirtual\View\frmCadastroCategoria.dfm</Transaction>
+    <Transaction>2019/07/05 10:38:26.000.620,=D:\work\carteiraVirtual\Unit4.pas</Transaction>
+    <Transaction>2019/07/05 10:39:10.000.208,D:\work\carteiraVirtual\Unit4.pas=D:\work\carteiraVirtual\View\frmMovimentacaoCarteira.pas</Transaction>
+    <Transaction>2019/07/05 10:39:10.000.208,D:\work\carteiraVirtual\Unit4.dfm=D:\work\carteiraVirtual\View\frmMovimentacaoCarteira.dfm</Transaction>
+    <Transaction>2019/07/05 11:29:11.000.622,=D:\work\carteiraVirtual\Unit1.pas</Transaction>
+    <Transaction>2019/07/05 11:30:03.000.534,D:\work\carteiraVirtual\Unit1.pas=D:\work\carteiraVirtual\Model\Conexao\uConexao.pas</Transaction>
+    <Transaction>2019/07/05 11:30:40.000.248,D:\work\carteiraVirtual\Model\Conexao\uConexao.pas=D:\work\carteiraVirtual\Model\Conexao\uConexaoBanco.pas</Transaction>
+    <Transaction>2019/07/05 14:19:17.000.814,=D:\work\carteiraVirtual\Unit1.pas</Transaction>
+    <Transaction>2019/07/05 14:29:57.000.455,D:\work\carteiraVirtual\Unit1.pas=D:\work\carteiraVirtual\Model\Movimentacao.Modal.pas</Transaction>
+    <Transaction>2019/07/05 15:00:04.000.845,D:\work\carteiraVirtual\Model\Movimentacao.Modal.pas=D:\work\carteiraVirtual\Model\Movimentacao.Model.pas</Transaction>
+    <Transaction>2019/07/05 15:34:59.000.013,=D:\work\carteiraVirtual\Unit1.pas</Transaction>
+    <Transaction>2019/07/05 15:35:49.000.791,D:\work\carteiraVirtual\Unit1.pas=D:\work\carteiraVirtual\View\frmCadastroLancamento.pas</Transaction>
+    <Transaction>2019/07/05 15:35:49.000.791,D:\work\carteiraVirtual\Unit1.dfm=D:\work\carteiraVirtual\View\frmCadastroLancamento.dfm</Transaction>
+    <Transaction>2019/07/05 16:00:58.000.535,D:\work\carteiraVirtual\Model\Movimentacao.Model.pas=D:\work\carteiraVirtual\Model\uMovimentacao.Model.pas</Transaction>
+    <Transaction>2019/07/05 19:03:38.000.373,=D:\work\carteiraVirtual\Unit1.pas</Transaction>
+    <Transaction>2019/07/05 19:04:42.000.814,D:\work\carteiraVirtual\Unit1.pas=D:\work\carteiraVirtual\Controller\uMovimentacao.Controller.pas</Transaction>
+    <Transaction>2019/07/05 19:07:14.000.087,D:\work\carteiraVirtual\Model\uMovimentacao.Model.pas=D:\work\carteiraVirtual\Model\uMovimentacao.pas</Transaction>
+    <Transaction>2019/07/05 19:07:50.000.551,D:\work\carteiraVirtual\Controller\uMovimentacao.Controller.pas=D:\work\carteiraVirtual\Controller\uMovimentacaoController.pas</Transaction>
+    <Transaction>2019/07/05 19:08:10.000.923,D:\work\carteiraVirtual\Model\uMovimentacao.pas=D:\work\carteiraVirtual\Model\uMovimentacaoModel.pas</Transaction>
+    <Transaction>2019/07/06 08:49:59.000.432,=D:\work\carteiraVirtual\Unit1.pas</Transaction>
+    <Transaction>2019/07/06 08:50:30.000.519,D:\work\carteiraVirtual\Unit1.pas=D:\work\carteiraVirtual\Model\uCategoria.pas</Transaction>
+    <Transaction>2019/07/06 08:50:56.000.949,D:\work\carteiraVirtual\Model\uCategoria.pas=D:\work\carteiraVirtual\Model\uCategoriaModel.pas</Transaction>
+    <Transaction>2019/07/06 08:51:05.000.753,=D:\work\carteiraVirtual\Unit1.pas</Transaction>
+    <Transaction>2019/07/06 08:51:40.000.952,D:\work\carteiraVirtual\Unit1.pas=D:\work\carteiraVirtual\Controller\uCategoriaController.pas</Transaction>
+    <Transaction>2019/07/07 14:16:28.000.737,=D:\work\carteiraVirtual\Unit1.pas</Transaction>
+    <Transaction>2019/07/07 14:16:49.000.494,D:\work\carteiraVirtual\Unit1.pas=D:\work\carteiraVirtual\View\frmGrafico.pas</Transaction>
+    <Transaction>2019/07/07 14:16:49.000.494,D:\work\carteiraVirtual\Unit1.dfm=D:\work\carteiraVirtual\View\frmGrafico.dfm</Transaction>
+    <Transaction>2019/07/07 19:03:54.000.347,=D:\work\carteiraVirtual\Unit1.pas</Transaction>
+    <Transaction>2019/07/07 19:04:16.000.934,D:\work\carteiraVirtual\Unit1.pas=D:\work\carteiraVirtual\Model\uCarteiraModel.pas</Transaction>
+    <Transaction>2019/07/07 19:04:26.000.266,=D:\work\carteiraVirtual\Unit1.pas</Transaction>
+    <Transaction>2019/07/07 19:04:46.000.223,D:\work\carteiraVirtual\Unit1.pas=D:\work\carteiraVirtual\Controller\uCarteiraController.pas</Transaction>
+    <Transaction>2019/07/07 19:18:53.000.950,=D:\work\carteiraVirtual\Unit1.pas</Transaction>
+    <Transaction>2019/07/07 19:24:45.000.239,D:\work\carteiraVirtual\Unit1.dfm=D:\work\carteiraVirtual\View\frmPesquisaCarteira.dfm</Transaction>
+    <Transaction>2019/07/07 19:24:45.000.239,D:\work\carteiraVirtual\Unit1.pas=D:\work\carteiraVirtual\View\frmPesquisaCarteira.pas</Transaction>
+  </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="Controller"/>
+    <File Path="Controller\uCarteiraController.pas"/>
+    <File Path="Controller\uCategoriaController.pas"/>
+    <File Path="Controller\uMovimentacaoController.pas"/>
+    <File Path="Model"/>
+    <File Path="Model\Conexao"/>
+    <File Path="Model\Conexao\uConexaoBanco.pas"/>
+    <File Path="Model\uCarteiraModel.pas"/>
+    <File Path="Model\uCategoriaModel.pas"/>
+    <File Path="Model\uMovimentacaoModel.pas"/>
+    <File Path="View"/>
+    <File Path="View\frmCadastroCarteira.pas"/>
+    <File Path="View\frmCadastroCarteira.dfm"/>
+    <File Path="View\frmCadastroCategoria.pas"/>
+    <File Path="View\frmCadastroCategoria.dfm"/>
+    <File Path="View\frmCadastroLancamento.pas"/>
+    <File Path="View\frmCadastroLancamento.dfm"/>
+    <File Path="View\frmCarteiraVirtual.pas"/>
+    <File Path="View\frmCarteiraVirtual.dfm"/>
+    <File Path="View\frmGrafico.pas"/>
+    <File Path="View\frmGrafico.dfm"/>
+    <File Path="View\frmMovimentacaoCarteira.pas"/>
+    <File Path="View\frmMovimentacaoCarteira.dfm"/>
+    <File Path="View\frmPesquisaCarteira.pas"/>
+    <File Path="View\frmPesquisaCarteira.dfm"/>
+  </ProjectSortOrder>
+</BorlandProject>

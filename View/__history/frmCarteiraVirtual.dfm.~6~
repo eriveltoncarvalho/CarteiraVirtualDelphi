@@ -1,0 +1,45 @@
+object frmCarteiraVirtualF: TfrmCarteiraVirtualF
+  Left = 0
+  Top = 0
+  Caption = 'Carteira Virtual'
+  ClientHeight = 549
+  ClientWidth = 1018
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  Menu = MainMenu1
+  OldCreateOrder = False
+  WindowState = wsMaximized
+  PixelsPerInch = 96
+  TextHeight = 13
+  object MainMenu1: TMainMenu
+    Left = 96
+    Top = 32
+    object Cadastro1: TMenuItem
+      Caption = 'Cadastro'
+      object Carteira1: TMenuItem
+        Caption = 'Carteira'
+      end
+      object Categoria1: TMenuItem
+        Caption = 'Categoria'
+        OnClick = Categoria1Click
+      end
+    end
+    object Movimentao1: TMenuItem
+      Caption = 'Movimenta'#231#227'o'
+      object Carteira2: TMenuItem
+        Caption = 'Carteira'
+        OnClick = Carteira2Click
+      end
+    end
+    object Relatrio1: TMenuItem
+      Caption = 'Relat'#243'rio'
+    end
+    object Sair1: TMenuItem
+      Caption = 'Sair'
+    end
+  end
+end

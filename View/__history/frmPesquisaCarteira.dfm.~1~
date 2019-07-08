@@ -1,0 +1,128 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 574
+  ClientWidth = 817
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel: TPanel
+    Left = 0
+    Top = 517
+    Width = 817
+    Height = 57
+    Align = alBottom
+    TabOrder = 0
+    ExplicitLeft = 16
+    ExplicitTop = 8
+    ExplicitWidth = 393
+    object Bevel: TBevel
+      Left = 10
+      Top = 9
+      Width = 333
+      Height = 17
+      Shape = bsTopLine
+    end
+    object btnSalvar: TBitBtn
+      Left = 138
+      Top = 20
+      Width = 100
+      Height = 33
+      Caption = 'OK'
+      TabOrder = 0
+    end
+    object btnCancelar: TBitBtn
+      Left = 243
+      Top = 20
+      Width = 100
+      Height = 33
+      Caption = 'Cancelar'
+      TabOrder = 1
+    end
+  end
+  object GroupBox1: TGroupBox
+    Left = 0
+    Top = 0
+    Width = 817
+    Height = 258
+    Align = alTop
+    Caption = 'Carteira'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 1
+    ExplicitLeft = -341
+    ExplicitTop = 28
+    ExplicitWidth = 722
+    object dbgMovimentacao: TDBGrid
+      Left = 2
+      Top = 15
+      Width = 813
+      Height = 241
+      Align = alClient
+      ReadOnly = True
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = [fsBold]
+      Columns = <
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'Data'
+          Title.Alignment = taCenter
+          Width = 134
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Categoria'
+          Width = 106
+          Visible = True
+        end>
+    end
+  end
+  object cdsMovimentacao: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 536
+    Top = 313
+    object cdsMovimentacaoData: TDateTimeField
+      FieldName = 'Data'
+    end
+    object cdsMovimentacaoCategoria: TStringField
+      FieldName = 'Categoria'
+      Size = 255
+    end
+    object cdsMovimentacaoOperacao: TStringField
+      FieldName = 'Operacao'
+    end
+    object cdsMovimentacaoObservacao: TStringField
+      FieldName = 'Observacao'
+      Size = 255
+    end
+    object cdsMovimentacaoValor: TCurrencyField
+      FieldName = 'Valor'
+    end
+    object cdsMovimentacaoSaldo: TCurrencyField
+      FieldName = 'Saldo'
+    end
+  end
+  object dsMovimentacao: TDataSource
+    DataSet = cdsMovimentacao
+    Left = 632
+    Top = 313
+  end
+end

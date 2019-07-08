@@ -1,0 +1,87 @@
+unit uCategoriaModel;
+
+interface
+
+uses
+  Dialogs, MyAccess;
+
+type
+   TCategoria=class
+   private
+      // atributos da classe
+      Fid: integer;
+      Fnome: string;
+      FConexaoBanco: TMyConnection;
+      FqrySQL: TMyQuery;
+
+   public
+      // métodos públicos da classe
+      constructor Create;
+      destructor  Destroy; override;
+      procedure Busca(const objetoCategoria: TCategoria);
+      procedure Salvar(const objetoCategoria: TCategoria);
+
+
+      // propriedades da classe
+      property id: integer read Fid;
+      property nome: string read Fnome;
+      property ConexaoBanco:TMyConnection read FConexaoBanco;
+      property qrySQL:TMyQuery read FqrySQL;
+   end;
+
+implementation
+
+uses
+  SysUtils, uConexaoBanco;
+
+
+{ TCategoria }
+
+procedure TCategoria.Busca(const objetoCategoria: TCategoria);
+ var Qry : TMyQuery;
+begin
+    try
+      Qry := TMyQuery.Create(nil);
+      qry.Connection:= FConexaoBanco;
+      qry.SQL.Add('select *from categorias order by id)');
+      Qry.Open;
+
+
+
+    finally
+
+     FreeAndNil(Qry);
+    end;
+
+
+end;
+
+constructor TCategoria.Create;
+ var ConexaoBanco : TConexaoBanco;
+begin
+   ConexaoBanco := TConexaoBanco.Create;
+
+   FConexaoBanco := ConexaoBanco.GetConexao;
+end;
+
+destructor TCategoria.Destroy;
+begin
+  inherited;
+  FConexaoBanco.Free;
+end;
+
+procedure TCategoria.Salvar(const objetoCategoria: TCategoria);
+ var Qry : TMyQuery;
+begin
+   try
+      Qry := TMyQuery.Create(nil);
+      qry.Connection:= FConexaoBanco;
+      qry.SQL.Add('INSERT INTO carteira_virtual.categorias(nome) VALUES('+objetoCategoria.nome+')');
+      Qry.ExecSQL;
+    finally
+
+     FreeAndNil(Qry);
+    end;
+end;
+
+end.

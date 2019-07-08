@@ -1,0 +1,40 @@
+unit frmCadastroCarteira;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TfrmCadastroCarteiraF = class(TForm)
+    Panel: TPanel;
+    Bevel: TBevel;
+    lblCarteira: TLabel;
+    btnSalvar: TBitBtn;
+    btnCancelar: TBitBtn;
+    edtCarteira: TEdit;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+     class function Execute: boolean;
+  end;
+
+var
+  frmCadastroCarteiraF: TfrmCadastroCarteiraF;
+
+implementation
+
+{$R *.dfm}
+
+{ TfrmCadastroCarteiraF }
+
+class function TfrmCadastroCarteiraF.Execute: boolean;
+begin
+   with TfrmCadastroCarteiraF.Create(Screen.ActiveForm) do begin
+     Result:= ShowModal() = mrOK;
+   end;
+end;
+
+end.

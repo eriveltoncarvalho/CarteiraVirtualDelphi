@@ -1,0 +1,85 @@
+unit frmGrafico;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, VclTee.TeeGDIPlus, VCLTee.TeEngine,
+  VCLTee.TeeProcs, VCLTee.Chart, Vcl.ExtCtrls, VCLTee.Series, Data.DB,
+  Datasnap.DBClient, VCLTee.DBChart, VCLTee.TeeDBCrossTab;
+
+type
+  TfrmGraficoF = class(TForm)
+    Panel: TPanel;
+    DBChart1: TDBChart;
+    Series1: TPieSeries;
+    cdsMovimentacao: TClientDataSet;
+    cdsMovimentacaoCategoria: TStringField;
+    cdsMovimentacaoValor: TCurrencyField;
+    dsMovimentacao: TDataSource;
+    DBCrossTabSource1: TDBCrossTabSource;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+
+    class function Execute: boolean;
+  end;
+
+var
+  frmGraficoF: TfrmGraficoF;
+
+implementation
+
+{$R *.dfm}
+
+{ TfrmGraficoF }
+
+class function TfrmGraficoF.Execute: boolean;
+begin
+   with TfrmGraficoF.Create(Screen.ActiveForm) do
+  begin
+    Result:= ShowModal() = mrOK;
+  end;
+end;
+
+procedure TfrmGraficoF.FormCreate(Sender: TObject);
+begin
+
+   DBChart1.Title.Caption := 'Gráfico de entradas por categoria';
+
+
+  if not cdsMovimentacao.Active then
+         cdsMovimentacao.CreateDataSet
+      else begin
+         cdsMovimentacao.Active := false;
+         cdsMovimentacao.CreateDataSet;
+      end;
+
+
+
+          cdsMovimentacao.Append;
+          cdsMovimentacaoCategoria.AsString    := 'outros';
+          cdsMovimentacaoValor.AsCurrency      := 180;
+          cdsMovimentacao.Post;
+
+           cdsMovimentacao.Append;
+          cdsMovimentacaoCategoria.AsString    := 'teste';
+          cdsMovimentacaoValor.AsCurrency      := 10;
+          cdsMovimentacao.Post;
+
+           cdsMovimentacao.Append;
+          cdsMovimentacaoCategoria.AsString    := 'teste2';
+          cdsMovimentacaoValor.AsCurrency      := 150;
+          cdsMovimentacao.Post;
+
+
+
+
+
+
+      cdsMovimentacao.Open;
+end;
+
+end.

@@ -1,0 +1,136 @@
+unit frmCadastroLancamento;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls,
+  Data.DB, MemDS, DBAccess, MyAccess,System.Generics.Collections,
+  Datasnap.DBClient, Vcl.Mask, System.StrUtils ;
+
+type
+  TfrmCadastroLancamentoF = class(TForm)
+    Panel: TPanel;
+    Bevel: TBevel;
+    btnSalvar: TBitBtn;
+    cmbOperacao: TComboBox;
+    cmbCategoria: TComboBox;
+    lblCategoria: TLabel;
+    mObservacao: TMemo;
+    lblOperacao: TLabel;
+    lbeValor: TLabeledEdit;
+    lblObservacao: TLabel;
+    btnCancelar: TBitBtn;
+    procedure btnSalvarClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure lbeValorKeyPress(Sender: TObject; var Key: Char);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+     class function Execute(ID_Carteira: integer): boolean;
+  end;
+
+var
+  frmCadastroLancamentoF: TfrmCadastroLancamentoF;
+  _IdCarteira: integer;
+
+implementation
+
+{$R *.dfm}
+
+uses uMovimentacaoController, uMovimentacaoModel, uCategoriaController,
+  uCategoriaModel;
+
+{ TfrmCadastroLancamentoF }
+
+procedure TfrmCadastroLancamentoF.btnCancelarClick(Sender: TObject);
+begin
+  ModalResult := mrCancel;
+end;
+
+procedure TfrmCadastroLancamentoF.btnSalvarClick(Sender: TObject);
+  var
+  // variáveis das camadas utilizadas na rotina
+    objetoMovimentacao: TMovimentacao;
+    objetoController: TControllerMovimentacao;
+    Valor: string;
+begin
+    objetoMovimentacao  := TMovimentacao.Create; // classe Modelo
+    objetoController := TControllerMovimentacao.Create; // classe Controller
+    try
+      // preenchimento dos dados
+      objetoMovimentacao.id_categorias := (cmbCategoria.ItemIndex)+1;
+      objetoMovimentacao.id_carteiras  := _IdCarteira;
+      objetoMovimentacao.operacao      := cmbOperacao.Text;
+      objetoMovimentacao.observacao    := Trim(mObservacao.Text);
+
+      //chamada da rotina saldo atual
+      objetoController.GetSaldo(objetoMovimentacao);
+
+      if cmbOperacao.Text='Crédito' then
+         objetoMovimentacao.valor :=  StrToCurr(lbeValor.text)
+      else objetoMovimentacao.valor :=(StrToCurr(lbeValor.text)*-1);
+
+     // Valor := FloatToStr(objetoMovimentacao.saldo+objetoMovimentacao.valor);
+      objetoMovimentacao.saldo := objetoMovimentacao.saldo+objetoMovimentacao.valor;//  StrToFloat(AnsiReplaceStr(valor,',','.'));
+
+      // chamada da rotina para gravação
+      objetoController.Salvar(objetoMovimentacao);
+      ModalResult := mrOk;
+
+    finally
+      // liberação dos objetos da memória
+      FreeAndNil(objetoMovimentacao);
+      FreeAndNil(objetoController);
+    end;
+end;
+
+class function TfrmCadastroLancamentoF.Execute(ID_Carteira: integer): boolean;
+begin
+   with TfrmCadastroLancamentoF.Create(Screen.ActiveForm) do  begin
+     _IdCarteira:=ID_Carteira;
+     Result:= ShowModal() = mrOK;
+   end;
+end;
+
+procedure TfrmCadastroLancamentoF.FormCreate(Sender: TObject);
+var
+  // variáveis das camadas utilizadas na rotina
+    objetoCategoria: TCategoria;
+    objetoController: TControllerCategoria;
+begin
+    objetoCategoria  := TCategoria.Create; // classe Modelo
+    objetoController := TControllerCategoria.Create; // classe Controller
+    try
+      // chamada da rotina para buscar categoria
+      objetoController.buscar(objetoCategoria);
+
+      objetoCategoria.qrySQL.First;
+      while not objetoCategoria.qrySQL.Eof do begin
+         cmbCategoria.Items.Add(objetoCategoria.qrySQL.FieldByName('nome').AsString);
+
+         objetoCategoria.qrySQL.Next;
+      end;
+
+     cmbCategoria.ItemIndex:=0;
+
+    finally
+      // liberação dos objetos da memória
+      FreeAndNil(objetoCategoria);
+      FreeAndNil(objetoController);
+
+    end;
+
+end;
+
+procedure TfrmCadastroLancamentoF.lbeValorKeyPress(Sender: TObject; var Key: Char);
+begin
+  if not (Key in ['0'..'9',',',#8]) then
+  begin
+    Key := #0;
+  end;
+end;
+
+end.

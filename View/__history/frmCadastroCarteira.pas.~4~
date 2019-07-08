@@ -1,0 +1,70 @@
+unit frmCadastroCarteira;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TfrmCadastroCarteiraF = class(TForm)
+    Panel: TPanel;
+    Bevel: TBevel;
+    lblCarteira: TLabel;
+    btnSalvar: TBitBtn;
+    btnCancelar: TBitBtn;
+    edtCarteira: TEdit;
+    procedure btnSalvarClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+     class function Execute: boolean;
+  end;
+
+var
+  frmCadastroCarteiraF: TfrmCadastroCarteiraF;
+
+implementation
+
+{$R *.dfm}
+
+{ TfrmCadastroCarteiraF }
+
+procedure TfrmCadastroCarteiraF.btnCancelarClick(Sender: TObject);
+begin
+  ModalResult := mrCancel;
+end;
+
+procedure TfrmCadastroCarteiraF.btnSalvarClick(Sender: TObject);
+var
+  // variáveis das camadas utilizadas na rotina
+    objetoCategoria: TCategoria;
+    objetoController: TControllerCategoria;
+begin
+    objetoCategoria  := TCategoria.Create; // classe Modelo
+    objetoController := TControllerCategoria.Create; // classe Controller
+    try
+      // preenchimento dos dados
+      objetoCategoria.nome  := edtCategoria.Text;
+
+      // chamada da rotina para gravação
+      objetoController.Salvar(objetoCategoria);
+      ModalResult := mrOk;
+    finally
+      // liberação dos objetos da memória
+      FreeAndNil(objetoCategoria);
+      FreeAndNil(objetoController);
+    end;
+
+end;
+
+class function TfrmCadastroCarteiraF.Execute: boolean;
+begin
+   with TfrmCadastroCarteiraF.Create(Screen.ActiveForm) do begin
+     Result:= ShowModal() = mrOK;
+   end;
+end;
+
+end.
